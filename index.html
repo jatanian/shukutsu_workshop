@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>北運河・祝津 電動アシスト自転車ツアー まとめ</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="page">
+      <div class="eyebrow">Tarukuru Workshop — Kitaunga / Shukutsu Tour</div>
+      <h1 class="title">北運河・祝津 電動アシスト自転車ツアー<br>スポットまとめ(試作)</h1>
+      <p class="lede">シンポジウム・ワークショップ用の資料。北運河〜祝津エリアの候補スポットを、写真・動画・位置・Googleの口コミ・メモとともに一覧できるようにしている。※このページは3件のダミーデータによる試作版。</p>
+    </header>
+
+    <section class="map-section">
+      <h2 class="section-title" style="font-size:20px;margin:0 0 12px;">エリアマップ</h2>
+      <div class="map-frame">
+        <!--
+          本番投入時: Google My Maps で作成したスポットのマイマップを共有 → 埋め込みHTML取得 →
+          下のプレースホルダーを <iframe src="(My Mapsの埋め込みURL)" ...></iframe> に置き換える。
+        -->
+        <div class="map-placeholder">
+          <div class="map-placeholder-inner">
+            <div class="icon">Google My Maps 埋め込み予定</div>
+            <p>ここに、北運河〜祝津エリアの全スポットをピン留めした Google My Maps を埋め込む。各カードの「Googleマップで見る」リンクは、下のダミーデータでも実際のGoogleマップに飛ぶようにしてある。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="controls">
+      <div class="filter-chips" id="filter-chips"></div>
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="スポット名・メモで検索">
+      </div>
+    </div>
+    <div class="result-count" id="result-count"></div>
+
+    <div class="spot-grid" id="spot-grid"></div>
+
+    <footer class="page">
+      <p>タルクル(小樽商科大学) — 北運河・祝津 電動アシスト自転車ツアー ワークショップ資料</p>
+      <p>スポットは今後も追加予定。データは data/spots.js に集約している。</p>
+    </footer>
+  </div>
+
+  <script src="data/spots.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
