@@ -13,6 +13,10 @@
     return "★★★★★".slice(0, full) + "☆☆☆☆☆".slice(full);
   }
 
+  function isGoogleMapsUrl(url) {
+    return /google\.[a-z.]+\/maps|maps\.app\.goo\.gl|maps\.google\./i.test(url || "");
+  }
+
   function renderChips() {
     chipsEl.innerHTML = categories
       .map(
@@ -36,37 +40,53 @@
       q === "" ||
       spot.name.toLowerCase().includes(q) ||
       spot.notes.toLowerCase().includes(q) ||
-      spot.category.toLowerCase().includes(q);
+      spot.category.toLowerCase().includes(q) ||
+      (spot.reason || "").toLowerCase().includes(q);
     return inCategory && inQuery;
   }
 
   function cardHtml(spot) {
-    const mediaInner = spot.photos.length
-      ? `<img src="${spot.photos[0]}" alt="${spot.name}">`
-      : `<span class="placeholder-label">写真未登録</span>`;
+    const photoCount = spot.photos.length;
+    let mediaInner;
+    if (photoCount) {
+      mediaInner = spot.photos
+        .map((src) => `<div class="slide"><img src="${src}" alt="${spot.name}" loading="lazy"></div>`)
+        .join("");
+    } else {
+      mediaInner = `<div class="slide"><span class="placeholder-label">写真未登録</span></div>`;
+    }
     const videoTag = spot.videos.length ? `<span class="spot-video-tag">動画あり</span>` : "";
+    const photoCountTag = photoCount > 1 ? `<span class="spot-photo-count">1 / ${photoCount} 枚 →</span>` : "";
     const reviews = spot.googleReview.excerpts
       .map((ex) => `<div class="spot-review">${ex}</div>`)
       .join("");
+    const hasRating = spot.googleReview.rating > 0;
+    const linkLabel = isGoogleMapsUrl(spot.googleMapUrl) ? "Googleマップで見る ↗" : "詳細を見る ↗";
+    const priorityBadge = spot.priority ? `<span class="spot-priority">注目候補</span>` : "";
+    const reasonHtml = spot.reason
+      ? `<div class="spot-reason"><span class="label">選定理由</span>${spot.reason}</div>`
+      : "";
 
     return `
       <article class="spot-card">
-        <div class="spot-media">
+        <div class="spot-media${photoCount <= 1 ? " single" : ""}">
           <span class="spot-order">${spot.order}</span>
           ${mediaInner}
           ${videoTag}
+          ${photoCountTag}
         </div>
         <div class="spot-body">
           <div class="spot-heading">
             <h3 class="spot-name">${spot.name}</h3>
             <span class="spot-tag">${spot.category}</span>
+            ${priorityBadge}
           </div>
           <div class="spot-rating">
-            <span class="stars">${starString(spot.googleReview.rating)}</span>
-            <span class="score">${spot.googleReview.rating.toFixed(1)}</span>
-            <a href="${spot.googleMapUrl}" target="_blank" rel="noopener">Googleマップで見る ↗</a>
+            ${hasRating ? `<span class="stars">${starString(spot.googleReview.rating)}</span><span class="score">${spot.googleReview.rating.toFixed(1)}</span>` : ""}
+            <a href="${spot.googleMapUrl}" target="_blank" rel="noopener">${linkLabel}</a>
           </div>
-          <div class="spot-reviews">${reviews}</div>
+          ${reasonHtml}
+          ${reviews ? `<div class="spot-reviews">${reviews}</div>` : ""}
           <div class="spot-notes">
             <span class="label">メモ</span>
             ${spot.notes}
