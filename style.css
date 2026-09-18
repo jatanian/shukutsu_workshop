@@ -1,18 +1,18 @@
 :root {
-  --bg: #eef2f3;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --surface-2: #e2eaec;
-  --border: #cfdadd;
-  --text: #16232b;
-  --text-muted: #55707c;
-  --text-faint: #7f959c;
+  --surface-2: #f4f5f6;
+  --border: #e3e5e8;
+  --text: #1c1e21;
+  --text-muted: #62666d;
+  --text-faint: #93979e;
   --accent: #1f6f8b;
   --accent-strong: #124a5c;
-  --accent-tint: #dcedf1;
+  --accent-tint: #eaf3f6;
   --star: #d9932f;
-  --sunny-bg: #e4f3ea;
+  --sunny-bg: #eaf6ee;
   --sunny-text: #276b45;
-  --shadow: 0 1px 2px rgba(18,42,51,0.06), 0 8px 24px -12px rgba(18,42,51,0.18);
+  --shadow: 0 1px 2px rgba(18,20,23,0.04), 0 6px 18px -12px rgba(18,20,23,0.12);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -260,16 +260,6 @@ section.map-section { margin-top: 32px; }
   font-weight: 700;
   color: var(--accent-strong);
   background: var(--accent-tint);
-  padding: 3px 9px;
-  border-radius: 999px;
-  white-space: nowrap;
-}
-.spot-priority {
-  flex-shrink: 0;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--sunny-text, #276b45);
-  background: var(--sunny-bg, #e4f3ea);
   padding: 3px 9px;
   border-radius: 999px;
   white-space: nowrap;

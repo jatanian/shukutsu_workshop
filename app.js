@@ -62,7 +62,6 @@
       .join("");
     const hasRating = spot.googleReview.rating > 0;
     const linkLabel = isGoogleMapsUrl(spot.googleMapUrl) ? "Googleマップで見る ↗" : "詳細を見る ↗";
-    const priorityBadge = spot.priority ? `<span class="spot-priority">注目候補</span>` : "";
     const reasonHtml = spot.reason
       ? `<div class="spot-reason"><span class="label">選定理由</span>${spot.reason}</div>`
       : "";
@@ -79,7 +78,6 @@
           <div class="spot-heading">
             <h3 class="spot-name">${spot.name}</h3>
             <span class="spot-tag">${spot.category}</span>
-            ${priorityBadge}
           </div>
           <div class="spot-rating">
             ${hasRating ? `<span class="stars">${starString(spot.googleReview.rating)}</span><span class="score">${spot.googleReview.rating.toFixed(1)}</span>` : ""}
